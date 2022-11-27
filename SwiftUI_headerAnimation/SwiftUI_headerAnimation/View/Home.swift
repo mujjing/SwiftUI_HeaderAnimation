@@ -11,6 +11,15 @@ struct Home: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     header(safeAreaTop)
+                    
+                    VStack {
+                        ForEach(1...10, id: \.self) { _ in
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(.blue.gradient)
+                                .frame(height: 220)
+                        }
+                    }
+                    .padding(15)
                 }
             }
             .edgesIgnoringSafeArea(.top)
@@ -21,14 +30,14 @@ struct Home: View {
 extension Home {
     private func header(_ safeAreaTop: CGFloat) -> some View {
         ZStack {
-            VStack {
+            VStack(spacing: 15) {
                 HStack(spacing: 15) {
                     HStack(spacing: 8) {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.white)
                         
                         TextField("Search", text: .constant(""))
-                            .tint(.red)
+                            .tint(.white)
                     }
                     .padding(.vertical, 10)
                     .padding(.horizontal, 15)
@@ -36,7 +45,43 @@ extension Home {
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .fill(.black.opacity(0.15))
                     }
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .foregroundColor(.black)
+                            .frame(width: 35, height: 35)
+                            .clipShape(Circle())
+                            .background {
+                                Circle()
+                                    .fill(.white)
+                                    .padding(-2)
+                            }
+                        
+                    }
+
                 }
+                
+                HStack(spacing: 0) {
+                    customButton(symbolImage: "rectangle.portrait.and.arrow.forward", title: "Deposit") {
+                        
+                    }
+                    
+                    customButton(symbolImage: "dollarsign", title: "Withdraw") {
+                        
+                    }
+                    
+                    customButton(symbolImage: "qrcode", title: "QR Code") {
+                        
+                    }
+                    
+                    customButton(symbolImage: "qrcode.viewfinder", title: "Scanning") {
+                        
+                    }
+                }
+                .padding(.top, 10)
             }
             .environment(\.colorScheme, .dark)
             .padding([.horizontal, .bottom], 15)
@@ -45,6 +90,33 @@ extension Home {
                 Rectangle()
                     .fill(.red)
             }
+        }
+    }
+    
+    private func customButton(symbolImage: String, title: String, onClick: @escaping() -> ()) -> some View {
+        ZStack {
+            Button {
+                
+            } label: {
+                VStack(spacing: 0) {
+                    Image(systemName: symbolImage)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.red)
+                        .frame(width: 35, height: 35)
+                        .background {
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(.white)
+                        }
+                    
+                    Text(title)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .lineLimit(1)
+                        .foregroundColor(.white)
+                }
+                .frame(maxWidth: .infinity)
+            }
+
         }
     }
 }
