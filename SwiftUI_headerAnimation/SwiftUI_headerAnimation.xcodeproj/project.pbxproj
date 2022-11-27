@@ -11,6 +11,7 @@
 		DB0DFF342931078A0019D23F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0DFF332931078A0019D23F /* ContentView.swift */; };
 		DB0DFF362931078C0019D23F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0DFF352931078C0019D23F /* Assets.xcassets */; };
 		DB0DFF392931078C0019D23F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0DFF382931078C0019D23F /* Preview Assets.xcassets */; };
+		DB0DFF412933ADCD0019D23F /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0DFF402933ADCD0019D23F /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		DB0DFF332931078A0019D23F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DB0DFF352931078C0019D23F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB0DFF382931078C0019D23F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DB0DFF402933ADCD0019D23F /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		DB0DFF302931078A0019D23F /* SwiftUI_headerAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				DB0DFF3F2933ADC10019D23F /* View */,
 				DB0DFF312931078A0019D23F /* SwiftUI_headerAnimationApp.swift */,
 				DB0DFF332931078A0019D23F /* ContentView.swift */,
 				DB0DFF352931078C0019D23F /* Assets.xcassets */,
@@ -65,6 +68,14 @@
 				DB0DFF382931078C0019D23F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DB0DFF3F2933ADC10019D23F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB0DFF402933ADCD0019D23F /* Home.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB0DFF342931078A0019D23F /* ContentView.swift in Sources */,
+				DB0DFF412933ADCD0019D23F /* Home.swift in Sources */,
 				DB0DFF322931078A0019D23F /* SwiftUI_headerAnimationApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

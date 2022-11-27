@@ -1,21 +1,12 @@
 //
 //  ContentView.swift
-//  SwiftUI_headerAnimation
-//
-//  Created by 전지훈 on 2022/11/25.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        Home()
     }
 }
 
