@@ -5,13 +5,15 @@
 import SwiftUI
 
 struct Home: View {
+    @State var offsetY: CGFloat = 0
     var body: some View {
         GeometryReader { geo in
             let safeAreaTop = geo.safeAreaInsets.top
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     header(safeAreaTop)
-                    
+                        .offset(y: -offsetY)
+                        .zIndex(1)
                     VStack {
                         ForEach(1...10, id: \.self) { _ in
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -20,8 +22,13 @@ struct Home: View {
                         }
                     }
                     .padding(15)
+                    .zIndex(0)
+                }
+                .offset(coordinateSpace: .named("SCROLL")) { offset in
+                    offsetY = offset
                 }
             }
+            .coordinateSpace(name: "SCROLL")
             .edgesIgnoringSafeArea(.top)
         }
     }
@@ -30,6 +37,7 @@ struct Home: View {
 extension Home {
     private func header(_ safeAreaTop: CGFloat) -> some View {
         ZStack {
+            let progress = -(offsetY / 80) > 1 ? -1 : (offsetY > 0 ? 0 : (offsetY / 80))
             VStack(spacing: 15) {
                 HStack(spacing: 15) {
                     HStack(spacing: 8) {
@@ -82,6 +90,7 @@ extension Home {
                     }
                 }
                 .padding(.top, 10)
+                .offset(y: progress * 65)
             }
             .environment(\.colorScheme, .dark)
             .padding([.horizontal, .bottom], 15)
