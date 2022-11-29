@@ -126,3 +126,27 @@ struct Home_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+struct OffsetKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value = nextValue()
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func offset(coordinateSpace: CoordinateSpace, completion: @escaping (CGFloat) -> ()) -> some View {
+        self
+            .overlay {
+                GeometryReader { geo in
+                    let minY = geo.frame(in: coordinateSpace).minY
+                    Color.clear
+                        .preference(key:OffsetKey.self ,value: minY)
+                        .onPreferenceChange(OffsetKey.self) { value in
+                            completion(value)
+                        }
+                }
+            }
+    }
+}
