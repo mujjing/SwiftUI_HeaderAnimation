@@ -6,6 +6,8 @@ import SwiftUI
 
 struct Home: View {
     @State var offsetY: CGFloat = 0
+    @State var showSearchBar: Bool = false
+    
     var body: some View {
         GeometryReader { geo in
             let safeAreaTop = geo.safeAreaInsets.top
@@ -53,6 +55,7 @@ extension Home {
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .fill(.black.opacity(0.15))
                     }
+                    .opacity(showSearchBar ? 1 : 1 + progress)
                     
                     Button {
                         
@@ -90,20 +93,38 @@ extension Home {
                     }
                 }
                 .padding(.top, 10)
+                .padding(.horizontal, -progress * 50)
                 .offset(y: progress * 65)
+                .opacity(showSearchBar ? 0 : 1)
             }
+            .overlay(alignment: .topLeading, content: {
+                Button {
+                    showSearchBar = true
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                }
+                .offset(x: 13, y: 10)
+                .opacity(showSearchBar ? 0 : -progress)
+
+            })
+            .animation(.easeInOut(duration: 0.2), value: showSearchBar)
             .environment(\.colorScheme, .dark)
             .padding([.horizontal, .bottom], 15)
             .padding(.top, safeAreaTop + 10)
             .background {
                 Rectangle()
-                    .fill(.red)
+                    .fill(.red.gradient)
+                    .padding(.bottom, -progress * 85)
             }
         }
     }
     
     private func customButton(symbolImage: String, title: String, onClick: @escaping() -> ()) -> some View {
         ZStack {
+            let progress = -(offsetY / 80) > 1 ? -1 : (offsetY > 0 ? 0 : (offsetY / 80))
             Button {
                 
             } label: {
@@ -124,6 +145,15 @@ extension Home {
                         .foregroundColor(.white)
                 }
                 .frame(maxWidth: .infinity)
+                .opacity(1 + progress)
+                .overlay {
+                    Image(systemName: symbolImage)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .opacity(-progress)
+                        .offset(y: -10)
+                }
             }
 
         }
