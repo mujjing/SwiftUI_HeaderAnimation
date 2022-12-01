@@ -28,6 +28,7 @@ struct Home: View {
                 }
                 .offset(coordinateSpace: .named("SCROLL")) { offset in
                     offsetY = offset
+                    showSearchBar = (-offset > 80) && showSearchBar
                 }
             }
             .coordinateSpace(name: "SCROLL")
@@ -70,7 +71,20 @@ extension Home {
                                     .fill(.white)
                                     .padding(-2)
                             }
-                        
+                    }
+                    .opacity(showSearchBar ? 0 : 1)
+                    .overlay {
+                        if showSearchBar {
+                            Button {
+                                showSearchBar = false
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            }
+
+                        }
                     }
 
                 }
